@@ -2,30 +2,38 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChoppingManager : MonoBehaviour
+public class ChoppingController : MonoBehaviour
 {
     [SerializeField]
     GameObject hand;
     [SerializeField]
     float handSpeed = 0.15f;
 
-    bool isDown, hasChopped;
+    [SerializeField]
+    SoundEffectManager withdrawl, gain, loss, chop, place;
+
+    [HideInInspector]
+    public bool canChop;
+    bool isInPosition, hasChopped;
     
     ViewManager view;
 
     void Start()
     {
-        view = GetComponent<ViewManager>();
+        view = FindObjectOfType<ViewManager>();
     }
 
     void Update()
     {
-        if (!hasChopped && Input.GetMouseButtonDown(0))
+        if (canChop && !hasChopped && Input.GetMouseButtonDown(0))
         {
             Chop();
         }
+    }
 
-        if (view.Current().IsTraitor)
+    void FixedUpdate()
+    {
+        if (!hasChopped && view != null && view.Current() != null && view.Current().IsTraitor)
         {
             // TODO: possible traitor pull away
         }
@@ -33,7 +41,7 @@ public class ChoppingManager : MonoBehaviour
 
     IEnumerator SlideHand(bool down, bool switchOnFinish = false)
     {
-        isDown = false;
+        isInPosition = false;
         
         Vector2 direction = Vector2.down;
         float speed = handSpeed;
@@ -48,16 +56,21 @@ public class ChoppingManager : MonoBehaviour
         {
             hand.transform.localPosition += (Vector3)(direction * speed);
             yield return new WaitForSeconds(0);
-        }
 
-        if (down)
-        {
-            isDown = true;
+            if (down && !isInPosition && hand.transform.localPosition.y < 50)
+            {
+                isInPosition = true;
+            }
         }
 
         if (switchOnFinish)
         {
             view.ToggleView();
+        }
+
+        if (!hasChopped)
+        {
+            place.Play();   
         }
     }
 
@@ -65,7 +78,7 @@ public class ChoppingManager : MonoBehaviour
     {
         // TODO: chop animation
 
-        if (isDown)
+        if (isInPosition)
         {
             if (view.Current().IsTraitor)
             {
@@ -75,17 +88,25 @@ public class ChoppingManager : MonoBehaviour
             {
                 // TODO: faithful chop
             }
+            
+            gain.Play();
+            chop.Play();
         }
         else
         {
             // TODO: pre-emptive chop
+            loss.Play();
         }
 
         StartCoroutine(SlideHand(false, true));
+        
+        withdrawl.Play();
     }
 
     public IEnumerator Reset(float waitTime)
     {
+        hand.transform.localPosition = Vector2.up * 200;
+        
         yield return new WaitForSeconds(waitTime);
         
         hasChopped = false;

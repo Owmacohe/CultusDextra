@@ -13,6 +13,9 @@ public class CultistManager : MonoBehaviour
     float cultistSpeed = 5;
     [SerializeField]
     float startingOffset = 12;
+    
+    [SerializeField]
+    SoundEffectManager steps, day;
 
     Queue<Cultist> procession;
     List<Cultist> finished;
@@ -26,7 +29,7 @@ public class CultistManager : MonoBehaviour
         procession = new Queue<Cultist>();
         finished = new List<Cultist>();
 
-        view = GetComponent<ViewManager>();
+        view = FindObjectOfType<ViewManager>();
     }
 
     public void AddCultist()
@@ -50,10 +53,21 @@ public class CultistManager : MonoBehaviour
         while (obj.transform.localPosition.x < target)
         {
             // TODO: slow speed as target is reached
-            
+
+            if (!view.isChopping)
+            {
+                steps.loopSounds = true;   
+            }
+            else
+            {
+                steps.loopSounds = false;
+            }
+
             obj.transform.localPosition += (Vector3)(Vector2.right * (cultistSpeed * 0.001f));
             yield return new WaitForSeconds(0);
         }
+        
+        steps.loopSounds = false;
 
         if (switchOnFinish)
         {

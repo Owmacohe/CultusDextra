@@ -6,15 +6,16 @@ public class ViewManager : MonoBehaviour
     [SerializeField]
     GameObject choppingCanvas;
 
-    bool isChopping;
+    [HideInInspector]
+    public bool isChopping;
 
     CultistManager cult;
-    ChoppingManager chop;
+    ChoppingController chop;
 
     void Start()
     {
-        cult = GetComponent<CultistManager>();
-        chop = GetComponent<ChoppingManager>();
+        cult = FindObjectOfType<CultistManager>();
+        chop = FindObjectOfType<ChoppingController>();
         
         choppingCanvas.SetActive(false);
         
@@ -36,11 +37,13 @@ public class ViewManager : MonoBehaviour
         if (isChopping)
         {
             choppingCanvas.SetActive(false);
+            chop.canChop = false;
             StartCoroutine(cult.Reset(2));
         }
         else
         {
             choppingCanvas.SetActive(true);
+            chop.canChop = true;
             StartCoroutine(chop.Reset(0.5f));
         }
 
