@@ -1,0 +1,15 @@
+Sound Use:
+
+Onoma-Impact07-1(Dry) – Hand withdrawal 
+
+Buddhist Temple Bell01-1 - Win/Point Gain
+
+cancel-01 – Miss/Loss
+
+foot3/ Footstep-high/アスファルトの上を歩く2 – Cult member footsteps (before presenting hand)
+
+horror1 – “Week showcase”/Level transition
+
+ナイフで突き刺す1 – Cutting a finger
+
+衣擦れ2 – Placing hand on table/cutting board
