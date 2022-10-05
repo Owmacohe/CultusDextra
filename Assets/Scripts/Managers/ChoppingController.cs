@@ -64,7 +64,7 @@ public class ChoppingController : MonoBehaviour
         if (!down)
         {
             direction = Vector2.up;
-            speed *= 10;
+            speed *= 15;
         }
 
         while ((down && hand.transform.localPosition.y > 0) || (!down && hand.transform.localPosition.y < 200))
