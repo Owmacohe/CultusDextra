@@ -104,7 +104,7 @@ public class CultistManager : MonoBehaviour
         // Move front cultist to altar
         StartCoroutine(AdvanceCultist(
             current.Object, 
-            current.Object.transform.localPosition.x + (cultistSpacing * 5),
+            current.Object.transform.localPosition.x + (cultistSpacing * 3),
             true,
             true
         ));

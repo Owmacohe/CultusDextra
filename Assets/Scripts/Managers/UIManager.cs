@@ -29,12 +29,20 @@ public class UIManager : MonoBehaviour
         traitorsEscaped.text = "Traitors escaped: " + stats.TotalEscaped;
     }
 
+    public void UpdateUIAnticipation(float anticipation)
+    {
+        if (anticipation > 10)
+        {
+            anticipation = 10;
+        }
+        
+        anticipationBuildup.text = "Anticipation: " + (Mathf.Round(anticipation * 100f) / 100f);
+    }
+
     public void UpdateUIAfterChop(bool chopped, bool faithful, bool escaped)
     {
         stats.UpdateAfterChop(chopped, faithful, escaped);
         
         UpdateUI();
     }
-
-    // TODO: update anticipation
 }
