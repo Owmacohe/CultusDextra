@@ -38,6 +38,7 @@ public class ViewManager : MonoBehaviour
         {
             choppingCanvas.SetActive(false);
             chop.canChop = false;
+            //cult.NewDay();
             StartCoroutine(cult.Reset(2));
         }
         else

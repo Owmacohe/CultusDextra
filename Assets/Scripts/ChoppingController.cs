@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChoppingController : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class ChoppingController : MonoBehaviour
     GameObject hand;
     [SerializeField]
     float handSpeed = 0.15f;
+    [SerializeField, Range(0, 1)]
+    float traitorPullChance = 0.1f;
+    [SerializeField]
+    UIManager UI;
 
     [SerializeField]
     SoundEffectManager withdrawl, gain, loss, chop, place;
@@ -33,9 +38,19 @@ public class ChoppingController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!hasChopped && view != null && view.Current() != null && view.Current().IsTraitor)
+        // TODO: increase anticipation
+        
+        if (
+            canChop && !hasChopped && isInPosition
+            && view != null && view.Current() != null && view.Current().IsTraitor
+            && Random.Range(0f, 1f) <= traitorPullChance)
         {
-            // TODO: possible traitor pull away
+            hasChopped = true;
+            StartCoroutine(SlideHand(false, true));
+            loss.Play();
+            withdrawl.Play();
+            
+            UI.UpdateUIAfterChop(false, false, true);
         }
     }
 
@@ -70,23 +85,26 @@ public class ChoppingController : MonoBehaviour
 
         if (!hasChopped)
         {
-            place.Play();   
+            place.Play();
         }
     }
 
     void Chop()
     {
+        hasChopped = true;
+        
+        // TODO: increase anticipation
         // TODO: chop animation
 
         if (isInPosition)
         {
             if (view.Current().IsTraitor)
             {
-                // TODO: traitor chop
+                UI.UpdateUIAfterChop(true, false, false);
             }
             else
             {
-                // TODO: faithful chop
+                UI.UpdateUIAfterChop(true, true, false);
             }
             
             gain.Play();
@@ -94,7 +112,7 @@ public class ChoppingController : MonoBehaviour
         }
         else
         {
-            // TODO: pre-emptive chop
+            UI.UpdateUIAfterChop(false, true, false);
             loss.Play();
         }
 

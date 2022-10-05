@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CultistManager : MonoBehaviour
 {
@@ -41,18 +42,34 @@ public class CultistManager : MonoBehaviour
         GameObject temp = Instantiate(cultistPrefab, transform);
         temp.transform.localPosition = Vector2.left * startingDistance;
 
+        bool isFaithful = Random.Range(0f, 1f) >= 0.3f;
+
         // Enqueue new Cultist
-        procession.Enqueue(new Cultist(temp, false));
+        procession.Enqueue(new Cultist(temp, isFaithful));
         
         // Move cultist up
         StartCoroutine(AdvanceCultist(temp, -target));
     }
     
-    IEnumerator AdvanceCultist(GameObject obj, float target, bool switchOnFinish = false)
+    IEnumerator AdvanceCultist(GameObject obj, float target, bool slowOnApproach = false, bool switchOnFinish = false)
     {
         while (obj.transform.localPosition.x < target)
         {
-            // TODO: slow speed as target is reached
+            float speedOffset = (target - obj.transform.localPosition.x) / target;
+
+            if (!slowOnApproach)
+            {
+                speedOffset = 1;
+            }
+            else
+            {
+                float minOffset = 0.5f;
+
+                if (speedOffset < minOffset)
+                {
+                    speedOffset = minOffset;
+                }   
+            }
 
             if (!view.isChopping)
             {
@@ -63,7 +80,8 @@ public class CultistManager : MonoBehaviour
                 steps.loopSounds = false;
             }
 
-            obj.transform.localPosition += (Vector3)(Vector2.right * (cultistSpeed * 0.001f));
+            obj.transform.localPosition += (Vector3)(Vector2.right * (cultistSpeed * speedOffset * 0.001f));
+            
             yield return new WaitForSeconds(0);
         }
         
@@ -87,6 +105,7 @@ public class CultistManager : MonoBehaviour
         StartCoroutine(AdvanceCultist(
             current.Object, 
             current.Object.transform.localPosition.x + (cultistSpacing * 5),
+            true,
             true
         ));
 
@@ -118,7 +137,12 @@ public class CultistManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(waitTime);
-
+        
         AdvanceProcession();
+    }
+
+    public void NewDay()
+    {
+        day.Play();
     }
 }
