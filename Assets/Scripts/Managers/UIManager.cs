@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         anticipationBuildup.text = "Anticipation: " + Mathf.Round(anticipation);
         anticipationBuildup.fontSize = (anticipation * 2f) + 20f;
 
-        anticipationVignette.color = new Color(100, 0, 0, anticipation / 10f);
+        anticipationVignette.color = new Color(0.4f, 0, 0, anticipation / 10f);
         
         anim.SetText(AnimateText.AnimTypes.SHAKE, (anticipation * 0.02f) + 0.1f, anticipationBuildup.text);
     }

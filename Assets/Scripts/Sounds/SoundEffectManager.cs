@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class SoundEffectManager : MonoBehaviour
@@ -10,8 +11,7 @@ public class SoundEffectManager : MonoBehaviour
     public float volume = 0.5f;
     [SerializeField]
     bool changePitch;
-    [SerializeField]
-    bool makeSoundsRandomly;
+    public bool makeSoundsRandomly;
     [SerializeField]
     bool disallowRepeats = true;
     public bool loopSounds;
@@ -89,5 +89,10 @@ public class SoundEffectManager : MonoBehaviour
         }
         
         Play(temp);
+    }
+
+    public void Stop()
+    {
+        source.Stop();
     }
 }

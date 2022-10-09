@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -101,9 +101,189 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d241b806d48ae4c32a09f82cf3c2234c
+      internalID: 654023457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6838bfdb1eb347f8ba8ce3ad0cc61e4
+      internalID: -1253156272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2afc1908b8ab40b69ecbb3e42e45fc5
+      internalID: 1069981264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5407eb40115ea48c9ae244f2fe1692ec
+      internalID: 331033162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30191918f87b04a6c89a64833bf3958d
+      internalID: -128728569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c0b487b537b4057a41c3d3e7f5f324
+      internalID: 555254481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ad0f12231bbd49ba95c60a326654674
+      internalID: 795352904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cultist-sprite-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 0
+        width: 258.5
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17ae46152ce547fca72f4a8abe64973
+      internalID: 594460240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -114,7 +294,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cultist-sprite-sheet_0: 654023457
+      cultist-sprite-sheet_7: 594460240
+      cultist-sprite-sheet_4: -128728569
+      cultist-sprite-sheet_1: -1253156272
+      cultist-sprite-sheet_2: 1069981264
+      cultist-sprite-sheet_5: 555254481
+      cultist-sprite-sheet_3: 331033162
+      cultist-sprite-sheet_6: 795352904
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

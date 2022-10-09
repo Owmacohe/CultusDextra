@@ -4,14 +4,10 @@ using Random = UnityEngine.Random;
 
 public class Tremble : MonoBehaviour
 {
-    [SerializeField]
-    float xSpeed = 10;
-    [SerializeField]
-    float xAmplitude = 1;
-    [SerializeField]
-    float ySpeed = 15;
-    [SerializeField]
-    float yAmplitude = 0.1f;
+    public float xSpeed = 10;
+    public float xAmplitude = 1;
+    public float ySpeed = 15;
+    public float yAmplitude = 0.1f;
     [SerializeField, Range(0, 1)]
     float randomRange = 0.5f;
 

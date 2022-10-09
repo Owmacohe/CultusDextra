@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4359660983939542998}
   - component: {fileID: 4359660983939542999}
+  - component: {fileID: 2763333737412213317}
   - component: {fileID: 1724769377663902609}
   m_Layer: 0
   m_Name: Cultist
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4359660983939542996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6903d2ccfeb2ab243b014a39cc31cc29, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1069981264, guid: 70b1b2af687b0b941a060b0717b4bb0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,6 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2763333737412213317
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359660983939542996}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b95f73b76f26d4819ba562b405be85a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1724769377663902609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,13 +113,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4359660983939542996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82234ca4c37a420db9e78aa838c7afe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 10
-  xAmplitude: 0.005
-  ySpeed: 0
-  yAmplitude: 0
+  xSpeed: 7
+  xAmplitude: 0.003
+  ySpeed: 20
+  yAmplitude: 0.001
   randomRange: 1

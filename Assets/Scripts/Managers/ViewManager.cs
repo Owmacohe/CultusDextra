@@ -26,7 +26,7 @@ public class ViewManager : MonoBehaviour
     {
         Debug.Log("<b>VIEW:</b> initialize");
         
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             cult.AddCultist();
         }

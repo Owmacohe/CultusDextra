@@ -37,29 +37,42 @@ public class CultistManager : MonoBehaviour
     {
         Debug.Log("<b>CULTISTS:</b> add");
         
-        float target = procession.Count * cultistSpacing;
+        float target = procession.Count * cultistSpacing + (cultistSpacing * 1);
         float startingDistance = startingOffset + target;
         
         // Create cultist prefab at end of procession
         GameObject temp = Instantiate(cultistPrefab, transform);
         temp.transform.localPosition = Vector2.left * startingDistance;
 
-        bool isFaithful = Random.Range(0f, 1f) >= 0.3f;
+        bool isTraitor = Random.Range(0f, 1f) <= 0.3f;
+
+        if (isTraitor)
+        {
+            temp.GetComponent<Tremble>().enabled = true;
+        }
+        
+        Cultist tempCultist = new Cultist(temp, isTraitor);
 
         // Enqueue new Cultist
-        procession.Enqueue(new Cultist(temp, isFaithful));
+        procession.Enqueue(tempCultist);
         
         // Move cultist up
-        StartCoroutine(AdvanceCultist(temp, -target));
+        StartCoroutine(AdvanceCultist(tempCultist, -target));
     }
     
-    IEnumerator AdvanceCultist(GameObject obj, float target, bool slowOnApproach = false, bool switchOnFinish = false)
+    IEnumerator AdvanceCultist(Cultist cultist, float target, bool frontCultist = false)
     {
-        while (obj.transform.localPosition.x < target)
+        cultist.Animator.SetBool("isWalking", true);
+        cultist.Animator.speed = Random.Range(-0.05f, 0.05f) + 0.6f;
+        cultist.Animator.Play("walk", 0, Random.Range(0, 8));
+        
+        Transform cultistTransform = cultist.Object.transform;
+        
+        while (cultistTransform.localPosition.x < target)
         {
-            float speedOffset = (target - obj.transform.localPosition.x) / target;
+            float speedOffset = (target - cultistTransform.localPosition.x) / target;
 
-            if (!slowOnApproach)
+            if (!frontCultist)
             {
                 speedOffset = 1;
             }
@@ -82,14 +95,21 @@ public class CultistManager : MonoBehaviour
                 steps.loopSounds = false;
             }
 
-            obj.transform.localPosition += (Vector3)(Vector2.right * (cultistSpeed * speedOffset * 0.001f));
+            cultistTransform.localPosition += (Vector3)(Vector2.right * (cultistSpeed * speedOffset * 0.001f));
+
+            if (frontCultist)
+            {
+                cultistTransform.localPosition += (Vector3) (Vector2.up * (cultistSpeed * speedOffset * 0.0002f));
+            }
             
             yield return new WaitForSeconds(0);
         }
         
         steps.loopSounds = false;
+        
+        cultist.Animator.SetBool("isWalking", false);
 
-        if (switchOnFinish)
+        if (frontCultist)
         {
             view.ToggleView();
         }
@@ -103,23 +123,20 @@ public class CultistManager : MonoBehaviour
         current = procession.Dequeue();
         
         // Add a replacement cultist
+        // TODO: may want to remove with the day system
         AddCultist();
         
         // Move front cultist to altar
         StartCoroutine(AdvanceCultist(
-            current.Object, 
-            current.Object.transform.localPosition.x + (cultistSpacing * 3),
-            true,
+            current,
+            current.Object.transform.localPosition.x + (cultistSpacing * 2),
             true
         ));
 
         // Move all cultists forward
         foreach (Cultist i in procession)
         {
-            StartCoroutine(AdvanceCultist(
-                i.Object,
-                i.Object.transform.localPosition.x + cultistSpacing
-            ));
+            StartCoroutine(AdvanceCultist(i, i.Object.transform.localPosition.x + cultistSpacing));
         }
     }
 
@@ -127,7 +144,7 @@ public class CultistManager : MonoBehaviour
     {
         Debug.Log("<b>CULTISTS:</b> finish current");
         
-        // TODO: cultist leaving animation
+        // TODO: cultist leaving animation?
         
         Destroy(current.Object);
         
