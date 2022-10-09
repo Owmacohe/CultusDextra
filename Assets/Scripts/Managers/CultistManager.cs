@@ -35,6 +35,8 @@ public class CultistManager : MonoBehaviour
 
     public void AddCultist()
     {
+        Debug.Log("<b>CULTISTS:</b> add");
+        
         float target = procession.Count * cultistSpacing;
         float startingDistance = startingOffset + target;
         
@@ -95,6 +97,8 @@ public class CultistManager : MonoBehaviour
 
     void AdvanceProcession()
     {
+        Debug.Log("<b>CULTISTS:</b> advance");
+        
         // Dequeue cultist
         current = procession.Dequeue();
         
@@ -121,6 +125,8 @@ public class CultistManager : MonoBehaviour
 
     void FinishCurrent()
     {
+        Debug.Log("<b>CULTISTS:</b> finish current");
+        
         // TODO: cultist leaving animation
         
         Destroy(current.Object);
@@ -131,6 +137,8 @@ public class CultistManager : MonoBehaviour
 
     public IEnumerator Reset(float waitTime)
     {
+        Debug.Log("<b>CULTISTS:</b> reset");
+        
         if (current != null)
         {
             FinishCurrent();   

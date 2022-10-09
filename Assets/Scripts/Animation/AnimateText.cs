@@ -13,20 +13,30 @@ public class AnimateText : MonoBehaviour
     [SerializeField, Range(0, 1)]
     float amplitude = 0.1f;
     [SerializeField]
-    bool isButton = true;
+    bool isButton;
 
     TextAnimator anim;
+    TextAnimatorPlayer animPlayer;
     string innerText;
 
     void Start()
     {
         anim = GetComponent<TextAnimator>();
+        animPlayer = GetComponent<TextAnimatorPlayer>();
+        
         innerText = GetComponent<TMP_Text>().text;
         
         SetText(animationType, amplitude);
+        
+        anim.onEvent += OnEvent;
     }
 
-    public void SetText(AnimTypes type, float a)
+    void OnDestroy()
+    {
+        anim.onEvent -= OnEvent;
+    }
+
+    public void SetText(AnimTypes type, float a, string newText = "")
     {
         string typeString;
 
@@ -39,8 +49,30 @@ public class AnimateText : MonoBehaviour
                 typeString = "wiggle";
                 break;
         }
-        
-        anim.SetText("<" + typeString + " a=" + a + ">" + innerText + "</" + typeString + ">", false);
+
+        if (newText != "")
+        {
+            innerText = newText;
+        }
+
+        if (anim != null)
+        {
+            string temp = "<" + typeString + " a=" + a + ">" + innerText + "</" + typeString + ">";
+            
+            if (animPlayer != null)
+            {
+                animPlayer.ShowText(temp);
+            }
+            else
+            {
+                anim.SetText(temp, false);   
+            }
+        }
+    }
+
+    void ChangeScene()
+    {
+        SceneChange.StaticChange("Main");
     }
 
     void OnMouseOver()
@@ -56,6 +88,14 @@ public class AnimateText : MonoBehaviour
         if (isButton)
         {
             SetText(animationType, amplitude);
+        }
+    }
+
+    void OnEvent(string message)
+    {
+        if (message.Equals("done"))
+        {
+            Invoke(nameof(ChangeScene), 2);
         }
     }
 }
