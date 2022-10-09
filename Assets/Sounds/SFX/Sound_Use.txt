@@ -23,3 +23,8 @@ horror1 – “Week showcase”/Level transition
 魔王魂 効果音 物音15 – Confirmation Sound
 
 魔王魂 効果音 ジングル13 – Game Over
+
+mixkit-young-man-coughing-2227 – Coughing
+
+ゾンビの息遣い/眠りこけるモンスター – Heavy Breathing 
+
