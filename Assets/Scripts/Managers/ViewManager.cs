@@ -24,6 +24,8 @@ public class ViewManager : MonoBehaviour
 
     void Initialize()
     {
+        Debug.Log("<b>VIEW:</b> initialize");
+        
         for (int i = 0; i < 10; i++)
         {
             cult.AddCultist();
@@ -36,6 +38,8 @@ public class ViewManager : MonoBehaviour
     {
         if (isChopping)
         {
+            Debug.Log("<b>VIEW:</b> cultists");
+            
             choppingCanvas.SetActive(false);
             chop.canChop = false;
             //cult.NewDay();
@@ -43,6 +47,8 @@ public class ViewManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("<b>VIEW:</b> chopping");
+            
             choppingCanvas.SetActive(true);
             chop.canChop = true;
             StartCoroutine(chop.Reset(0.5f));
