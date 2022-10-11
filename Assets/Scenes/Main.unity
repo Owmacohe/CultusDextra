@@ -667,7 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cultistPrefab: {fileID: 4359660983939542996, guid: 2db921a36f554854593ac48a34bb01ea, type: 3}
   cultistSpacing: 3
-  cultistSpeed: 5
+  cultistSpeed: 4
   startingOffset: 12
   steps: {fileID: 1005245672}
   day: {fileID: 99861519}
@@ -741,7 +741,7 @@ MonoBehaviour:
   traitorPullChance: 0.005
   UI: {fileID: 2076732630}
   cleaver: {fileID: 902156277}
-  cleaverSpeed: 20
+  cleaverSpeed: 25
   withdrawl: {fileID: 479444146}
   gain: {fileID: 1975489439}
   loss: {fileID: 894625228}

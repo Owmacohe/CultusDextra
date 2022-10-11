@@ -105,7 +105,7 @@ public class ChoppingController : MonoBehaviour
                 view.ToggleView();
             }
         
-            place.Play();   
+            //place.Play();
         }
     }
 
@@ -147,7 +147,7 @@ public class ChoppingController : MonoBehaviour
 
     IEnumerator ChopAnimation()
     {
-        while (cleaver.localPosition.y > 41)
+        while (cleaver.localPosition.y > 39)
         {
             cleaver.localPosition += (Vector3)(Vector2.down * cleaverSpeed);
 
@@ -158,6 +158,9 @@ public class ChoppingController : MonoBehaviour
             
             yield return new WaitForSeconds(0);
         }
+
+        cleaver.localPosition = new Vector2(cleaver.localPosition.x, 39);
+        cleaver.localScale = Vector2.one * 0.4f;
     }
 
     public IEnumerator Reset(float waitTime)
