@@ -14,13 +14,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Image anticipationVignette;
 
-    Stats stats;
+    PlayerStats playerStats;
     AnimateText anim;
 
     void Start()
     {
-        stats = new Stats();
-
+        playerStats = FindObjectOfType<PlayerStats>();
         anim = anticipationBuildup.GetComponent<AnimateText>();
         
         UpdateUI();
@@ -29,13 +28,16 @@ public class UIManager : MonoBehaviour
     void UpdateUI()
     {
         Debug.Log("<b>UI:</b> update all");
+
+        Stats stats = playerStats.stats;
+        int day = stats.Day;
+
+        totalCultistsChopped.text = "Total cultists chopped: " + stats.TotalChopped[day];
+        faithfulChopped.text = "Faithful chopped: " + stats.FaithfulChopped[day];
+        traitorsChopped.text = "Traitors chopped: " + stats.TraitorsChopped[day];
         
-        totalCultistsChopped.text = "Total cultists chopped: " + stats.TotalChopped;
-        faithfulChopped.text = "Faithful chopped: " + stats.FaithfulChopped;
-        traitorsChopped.text = "Traitors chopped: " + stats.TraitorsChopped;
-        
-        cultistsMissed.text = "Cultists missed: " + stats.TotalMissed;
-        traitorsEscaped.text = "Traitors escaped: " + stats.TotalEscaped;
+        cultistsMissed.text = "Cultists missed: " + stats.TotalMissed[day];
+        traitorsEscaped.text = "Traitors escaped: " + stats.TotalEscaped[day];
         
         UpdateUIAnticipation(0);
     }
@@ -61,7 +63,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("<b>UI:</b> update stats");
         
-        stats.UpdateAfterChop(chopped, faithful, escaped);
+        playerStats.stats.UpdateAfterChop(chopped, faithful, escaped);
         
         UpdateUI();
     }

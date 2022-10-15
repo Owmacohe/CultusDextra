@@ -19,7 +19,7 @@ public class ChoppingController : MonoBehaviour
     float cleaverSpeed = 1;
 
     [SerializeField]
-    SoundEffectManager withdrawl, gain, loss, chop, place, breathing, coughing;
+    SoundEffectManager withdrawl, gain, loss, chop, anticipation, breathing, coughing;
 
     [HideInInspector] public bool canChop;
     bool isInPosition, hasChopped;
@@ -104,8 +104,6 @@ public class ChoppingController : MonoBehaviour
                 yield return new WaitForSeconds(2);
                 view.ToggleView();
             }
-        
-            //place.Play();
         }
     }
 
@@ -197,5 +195,6 @@ public class ChoppingController : MonoBehaviour
         }
 
         StartCoroutine(SlideHand(true));
+        anticipation.Play();
     }
 }

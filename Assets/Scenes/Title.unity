@@ -558,7 +558,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: 0
   amplitude: 0.1
-  isButton: 1
 --- !u!114 &361185767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +924,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: 1
   amplitude: 0.1
-  isButton: 0
 --- !u!1 &377304471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: 0
   amplitude: 0.1
-  isButton: 1
 --- !u!114 &378934676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,6 +1429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadOnStart: 0
   scene: 
+  bufferSeconds: 0
 --- !u!1 &1177836124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,7 +1560,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: 1
   amplitude: 0.1
-  isButton: 0
 --- !u!114 &1431083014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,7 +2079,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Main
+          m_StringArgument: Day Begin
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1777089800
@@ -2099,7 +2096,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: 0
   amplitude: 0.1
-  isButton: 1
 --- !u!114 &1777089801
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,6 +31,8 @@ public class CultistManager : MonoBehaviour
         finished = new List<Cultist>();
 
         view = FindObjectOfType<ViewManager>();
+
+        day.Play();
     }
 
     public void AddCultist()
@@ -40,7 +42,6 @@ public class CultistManager : MonoBehaviour
         float target = procession.Count * cultistSpacing + (cultistSpacing * 1);
         float startingDistance = startingOffset + target;
         
-        // Create cultist prefab at end of procession
         GameObject temp = Instantiate(cultistPrefab, transform);
         temp.transform.localPosition = Vector2.left * startingDistance;
 
@@ -52,11 +53,9 @@ public class CultistManager : MonoBehaviour
         }
         
         Cultist tempCultist = new Cultist(temp, isTraitor);
-
-        // Enqueue new Cultist
+        
         procession.Enqueue(tempCultist);
         
-        // Move cultist up
         StartCoroutine(AdvanceCultist(tempCultist, -target));
     }
     
@@ -118,22 +117,15 @@ public class CultistManager : MonoBehaviour
     void AdvanceProcession()
     {
         Debug.Log("<b>CULTISTS:</b> advance");
-        
-        // Dequeue cultist
+
         current = procession.Dequeue();
         
-        // Add a replacement cultist
-        // TODO: may want to remove with the day system
-        AddCultist();
-        
-        // Move front cultist to altar
         StartCoroutine(AdvanceCultist(
             current,
             current.Object.transform.localPosition.x + (cultistSpacing * 2),
             true
         ));
 
-        // Move all cultists forward
         foreach (Cultist i in procession)
         {
             StartCoroutine(AdvanceCultist(i, i.Object.transform.localPosition.x + cultistSpacing));
@@ -164,10 +156,16 @@ public class CultistManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         
         AdvanceProcession();
-    }
-
-    public void NewDay()
-    {
-        day.Play();
+        
+        /*
+        if (procession.Count == 0)
+        {
+            SceneChange.StaticChange("Day End");
+        }
+        else
+        {
+               
+        }
+        */
     }
 }
