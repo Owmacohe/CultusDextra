@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    TMP_Text totalCultistsChopped, faithfulChopped, traitorsChopped;
+    GameObject goodOutcome, badOutcome;
     [SerializeField]
-    TMP_Text cultistsMissed, traitorsEscaped;
-    [SerializeField]
-    TMP_Text anticipationBuildup;
+    TMP_Text goodText, badText, anticipationBuildup;
     [SerializeField]
     Image anticipationVignette;
 
@@ -25,19 +23,18 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
+    public void HideOutcomes()
+    {
+        goodOutcome.SetActive(false);
+        badOutcome.SetActive(false);
+    }
+
     void UpdateUI()
     {
         Debug.Log("<b>UI:</b> update all");
 
         Stats stats = playerStats.stats;
         int day = stats.Day;
-
-        totalCultistsChopped.text = "Total cultists chopped: " + stats.TotalChopped[day];
-        faithfulChopped.text = "Faithful chopped: " + stats.FaithfulChopped[day];
-        traitorsChopped.text = "Traitors chopped: " + stats.TraitorsChopped[day];
-        
-        cultistsMissed.text = "Cultists missed: " + stats.TotalMissed[day];
-        traitorsEscaped.text = "Traitors escaped: " + stats.TotalEscaped[day];
         
         UpdateUIAnticipation(0);
     }
@@ -62,9 +59,36 @@ public class UIManager : MonoBehaviour
     public void UpdateUIAfterChop(bool chopped, bool faithful, bool escaped)
     {
         Debug.Log("<b>UI:</b> update stats");
-        
+
         playerStats.stats.UpdateAfterChop(chopped, faithful, escaped);
-        
+
+        if (chopped)
+        {
+            goodOutcome.SetActive(true);
+
+            if (faithful)
+            {
+                goodText.text = "Faithful chopped!";
+            }
+            else
+            {
+                goodText.text = "Traitor chopped!";
+            }
+        }
+        else
+        {
+            badOutcome.SetActive(true);
+
+            if (escaped)
+            {
+                badText.text = "Cultist missed!";
+            }
+            else
+            {
+                badText.text = "Traitor escaped!";
+            }
+        }
+
         UpdateUI();
     }
 }

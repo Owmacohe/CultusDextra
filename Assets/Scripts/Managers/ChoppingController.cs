@@ -44,14 +44,23 @@ public class ChoppingController : MonoBehaviour
     {
         if (!hasChopped && isInPosition)
         {
-            UI.UpdateUIAnticipation((Time.time - anticipationStartTime) * 2f);
+            float temp = (Time.time - anticipationStartTime) * 2f;
+            
+            UI.UpdateUIAnticipation(temp);
+
+            if (Time.time % 0.5f == 0 && temp < 10)
+            {
+                view.UpdateUI(1);   
+            }
 
             if (
                 canChop
                 && view != null && view.Current() != null && view.Current().IsTraitor
-                && Random.Range(0f, 1f) <= traitorPullChance)
+                && (Random.Range(0f, 1f) <= traitorPullChance || (Time.time - anticipationStartTime >= 2.5f)))
             {
                 Debug.Log("<b>CHOPPING:</b> pull away");
+                
+                view.UpdateUI(-5);
                 
                 hasChopped = true;
                 StartCoroutine(SlideHand(false, true));
@@ -117,6 +126,8 @@ public class ChoppingController : MonoBehaviour
 
         if (isInPosition)
         {
+            view.UpdateUI(5);
+            
             if (view.Current().IsTraitor)
             {
                 Debug.Log("<b>CHOPPING:</b> traitor chop");
@@ -134,6 +145,9 @@ public class ChoppingController : MonoBehaviour
         else
         {
             Debug.Log("<b>CHOPPING:</b> early chop");
+            
+            view.UpdateUI(-5);
+            
             UI.UpdateUIAfterChop(false, true, false);
             loss.Play();
         }
@@ -164,6 +178,8 @@ public class ChoppingController : MonoBehaviour
     public IEnumerator Reset(float waitTime)
     {
         Debug.Log("<b>CHOPPING:</b> reset");
+        
+        UI.HideOutcomes();
         
         hand.transform.localPosition = Vector2.down * 200;
 

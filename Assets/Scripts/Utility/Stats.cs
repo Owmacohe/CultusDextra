@@ -33,7 +33,7 @@ public class Stats
         Day++;
         
         Score.Add(0);
-        Goal.Add(0);
+        Goal.Add(25 + (5 * Day));
         
         TotalChopped.Add(0);
         FaithfulChopped.Add(0);

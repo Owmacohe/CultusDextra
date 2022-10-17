@@ -19,7 +19,6 @@ public class CultistManager : MonoBehaviour
     SoundEffectManager steps, day;
 
     Queue<Cultist> procession;
-    List<Cultist> finished;
     
     public Cultist current;
 
@@ -28,7 +27,6 @@ public class CultistManager : MonoBehaviour
     void Start()
     {
         procession = new Queue<Cultist>();
-        finished = new List<Cultist>();
 
         view = FindObjectOfType<ViewManager>();
 
@@ -140,8 +138,10 @@ public class CultistManager : MonoBehaviour
         
         Destroy(current.Object);
         
-        finished.Add(current);
-        current = null;
+        if (procession.Count == 0)
+        {
+            SceneChange.StaticChange("Day End");
+        }
     }
 
     public IEnumerator Reset(float waitTime)
@@ -156,16 +156,5 @@ public class CultistManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         
         AdvanceProcession();
-        
-        /*
-        if (procession.Count == 0)
-        {
-            SceneChange.StaticChange("Day End");
-        }
-        else
-        {
-               
-        }
-        */
     }
 }
