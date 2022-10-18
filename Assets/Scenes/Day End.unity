@@ -246,6 +246,9 @@ MonoBehaviour:
   isBegin: 0
   day: {fileID: 1334243581}
   info: {fileID: 1985872396}
+  narrative: {fileID: 0}
+  cont: {fileID: 307500376}
+  click: {fileID: 1240305887}
 --- !u!1 &307500376
 GameObject:
   m_ObjectHideFlags: 0

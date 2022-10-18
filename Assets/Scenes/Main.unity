@@ -123,59 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &99861517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 99861518}
-  - component: {fileID: 99861519}
-  m_Layer: 0
-  m_Name: Day
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &99861518
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99861517}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 388643642}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &99861519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99861517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd42e619201e24478b93abfa52a837f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 41e82a2d40c5b5c4f9e4537ea08d7fdf, type: 3}
-  volume: 0.2
-  changePitch: 0
-  makeSoundsRandomly: 0
-  disallowRepeats: 0
-  loopSounds: 0
-  loopWaitTime: 0
-  randomChance: 100
 --- !u!1 &104034234
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +325,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1005245671}
-  - {fileID: 99861518}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -399,7 +345,6 @@ MonoBehaviour:
   cultistSpeed: 4
   startingOffset: 12
   steps: {fileID: 1005245672}
-  day: {fileID: 99861519}
 --- !u!114 &388643645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,7 +933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationType: 1
-  amplitude: 0.1
+  amplitude: 0.2
 --- !u!114 &629180842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,7 +2750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationType: 1
-  amplitude: 0.1
+  amplitude: 0.2
 --- !u!114 &1278756725
 MonoBehaviour:
   m_ObjectHideFlags: 0

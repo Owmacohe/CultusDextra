@@ -7,6 +7,11 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        Reset();
+    }
+
+    public void Reset()
+    {
         stats = new Stats();
     }
 }

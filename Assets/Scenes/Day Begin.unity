@@ -245,6 +245,7 @@ MonoBehaviour:
   isBegin: 1
   day: {fileID: 1969191315}
   info: {fileID: 1985872396}
+  narrative: {fileID: 4900000, guid: 7f46ee20724286942a4ec1cab3502f4e, type: 3}
 --- !u!1 &173148542
 GameObject:
   m_ObjectHideFlags: 0

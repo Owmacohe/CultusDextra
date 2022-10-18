@@ -79,6 +79,15 @@ public class ChoppingController : MonoBehaviour
     {
         if (!hasChopped || !up)
         {
+            if (up)
+            {
+                Debug.Log("<b>CHOPPING:</b> hand slide up");
+            }
+            else
+            {
+                Debug.Log("<b>CHOPPING:</b> hand slide down");
+            }
+            
             isInPosition = false;
         
             Vector2 direction = Vector2.up;

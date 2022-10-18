@@ -16,34 +16,39 @@ public class CultistManager : MonoBehaviour
     float startingOffset = 12;
     
     [SerializeField]
-    SoundEffectManager steps, day;
+    SoundEffectManager steps;
 
     Queue<Cultist> procession;
     
     public Cultist current;
 
     ViewManager view;
+    PlayerStats playerStats;
 
     void Start()
     {
         procession = new Queue<Cultist>();
 
         view = FindObjectOfType<ViewManager>();
-
-        day.Play();
+        playerStats = FindObjectOfType<PlayerStats>();
     }
 
     public void AddCultist()
     {
-        Debug.Log("<b>CULTISTS:</b> add");
-        
         float target = procession.Count * cultistSpacing + (cultistSpacing * 1);
         float startingDistance = startingOffset + target;
         
         GameObject temp = Instantiate(cultistPrefab, transform);
         temp.transform.localPosition = Vector2.left * startingDistance;
 
-        bool isTraitor = Random.Range(0f, 1f) <= 0.3f;
+        float traitorThreshold = 0.2f + (playerStats.stats.Day * 0.1f);
+
+        if (traitorThreshold > 0.8f)
+        {
+            traitorThreshold = 0.8f;
+        }
+        
+        bool isTraitor = playerStats.stats.Day > 0 && Random.Range(0f, 1f) <= traitorThreshold;
 
         if (isTraitor)
         {

@@ -32,6 +32,8 @@ public class ViewManager : MonoBehaviour
         
         UpdateUI();
         
+        Debug.Log("<b>CULTISTS:</b> add (x" + (5 + playerStats.stats.Day) + ")");
+        
         for (int i = 0; i < 5 + playerStats.stats.Day; i++)
         {
             cult.AddCultist();
@@ -66,6 +68,8 @@ public class ViewManager : MonoBehaviour
 
     public void UpdateUI(int scoreAdd = 0)
     {
+        Debug.Log("<b>VIEW:</b> update stats");
+        
         Stats stats = playerStats.stats;
 
         playerStats.stats.Score[stats.Day] += scoreAdd;

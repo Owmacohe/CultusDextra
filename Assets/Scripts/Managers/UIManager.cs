@@ -19,24 +19,12 @@ public class UIManager : MonoBehaviour
     {
         playerStats = FindObjectOfType<PlayerStats>();
         anim = anticipationBuildup.GetComponent<AnimateText>();
-        
-        UpdateUI();
     }
 
     public void HideOutcomes()
     {
         goodOutcome.SetActive(false);
         badOutcome.SetActive(false);
-    }
-
-    void UpdateUI()
-    {
-        Debug.Log("<b>UI:</b> update all");
-
-        Stats stats = playerStats.stats;
-        int day = stats.Day;
-        
-        UpdateUIAnticipation(0);
     }
 
     public void UpdateUIAnticipation(float anticipation)
@@ -66,29 +54,13 @@ public class UIManager : MonoBehaviour
         {
             goodOutcome.SetActive(true);
 
-            if (faithful)
-            {
-                goodText.text = "Faithful chopped!";
-            }
-            else
-            {
-                goodText.text = "Traitor chopped!";
-            }
+            goodText.text = faithful ? "Faithful chopped!" : "Traitor chopped!";
         }
         else
         {
             badOutcome.SetActive(true);
 
-            if (escaped)
-            {
-                badText.text = "Cultist missed!";
-            }
-            else
-            {
-                badText.text = "Traitor escaped!";
-            }
+            badText.text = escaped ? "Traitor escaped!" : "Cultist missed!";
         }
-
-        UpdateUI();
     }
 }
