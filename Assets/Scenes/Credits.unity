@@ -407,9 +407,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Visual design and illustration:
+  m_text: 'Visual Design and Illustration:
 
-    <font=Hadley SDF>Percy</font>'
+    <font=Hadley SDF>Percy Nguyen</font>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8024631f7bf3d7d4b86e76812da55444, type: 2}
   m_sharedMaterial: {fileID: 3348169580104958220, guid: 8024631f7bf3d7d4b86e76812da55444, type: 2}
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sound Producer and UI Design:
+  m_text: 'Sound Design and UI Design:
 
     <font=Hadley SDF>Patrick Chavez-Nadarajah</font>'
   m_isRightToLeft: 0
@@ -1640,7 +1640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Programming and scene assembly:
+  m_text: 'Programming and Scene Assembly:
 
     <font=Hadley SDF>Owen Hellum</font>'
   m_isRightToLeft: 0
@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Programming and scene assembly:
+  m_text: 'Programming and Scene Assembly:
 
     <font=Hadley SDF>Owen Hellum</font>'
   m_isRightToLeft: 0
@@ -2358,9 +2358,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Visual design and illustration:
+  m_text: 'Visual Design and Illustration:
 
-    <font=Hadley SDF>Percy</font>'
+    <font=Hadley SDF>Percy Nguyen</font>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8024631f7bf3d7d4b86e76812da55444, type: 2}
   m_sharedMaterial: {fileID: 3348169580104958220, guid: 8024631f7bf3d7d4b86e76812da55444, type: 2}
@@ -2797,7 +2797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sound Producer and UI Design:
+  m_text: 'Sound Design and UI Design:
 
     <font=Hadley SDF>Patrick Chavez-Nadarajah</font>'
   m_isRightToLeft: 0

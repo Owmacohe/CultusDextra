@@ -342,7 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cultistPrefab: {fileID: 4359660983939542996, guid: 2db921a36f554854593ac48a34bb01ea, type: 3}
   cultistSpacing: 3
-  cultistSpeed: 4
+  cultistSpeed: 55
   startingOffset: 12
   steps: {fileID: 1005245672}
 --- !u!114 &388643645
@@ -413,11 +413,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 1720278951}
-  handSpeed: 0.15
+  handSpeed: 1
   traitorPullChance: 0.005
   UI: {fileID: 2076732630}
   cleaver: {fileID: 902156277}
-  cleaverSpeed: 25
+  cleaverSpeed: 110
   withdrawl: {fileID: 479444146}
   gain: {fileID: 1975489439}
   loss: {fileID: 894625228}

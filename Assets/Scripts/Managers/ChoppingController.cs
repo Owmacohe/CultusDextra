@@ -27,6 +27,12 @@ public class ChoppingController : MonoBehaviour
 
     ViewManager view;
 
+    bool isSliding, isSlidingUp;
+    Vector2 slidingDirection;
+    float slidingSpeed;
+
+    bool isChopping;
+
     void Start()
     {
         view = FindObjectOfType<ViewManager>();
@@ -42,6 +48,48 @@ public class ChoppingController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isSliding)
+        {
+            if ((isSlidingUp && !hasChopped && hand.transform.localPosition.y < 0)
+                   || (!isSlidingUp && hand.transform.localPosition.y > -350))
+            {
+                hand.transform.localPosition += (Vector3)(slidingDirection * slidingSpeed);
+
+                if (isSlidingUp && !isInPosition && hand.transform.localPosition.y > -50)
+                {
+                    isInPosition = true;
+                    anticipationStartTime = Time.time;
+                }
+            }
+            else
+            {
+                isSliding = false;
+                isSlidingUp = false;
+                slidingDirection = Vector2.zero;
+                slidingSpeed = 0;
+            }
+        }
+
+        if (isChopping)
+        {
+            if (cleaver.localPosition.y > 39)
+            {
+                cleaver.localPosition += (Vector3)(Vector2.down * cleaverSpeed);
+
+                if (cleaver.localScale.x > 0.4f)
+                {
+                    cleaver.localScale -= (Vector3)(Vector2.one * 0.1f);   
+                }
+            }
+            else
+            {
+                cleaver.localPosition = new Vector2(cleaver.localPosition.x, 39);
+                cleaver.localScale = Vector2.one * 0.4f;
+
+                isChopping = false;
+            }
+        }
+        
         if (!hasChopped && isInPosition)
         {
             float temp = (Time.time - anticipationStartTime) * 2f;
@@ -97,25 +145,14 @@ public class ChoppingController : MonoBehaviour
             {
                 direction = Vector2.down;
                 speed *= 25;
-            }
-
-            if (!up)
-            {
+                
                 yield return new WaitForSeconds(0.2f);
             }
 
-            while ((up && !hasChopped && hand.transform.localPosition.y < 0)
-                   || (!up && hand.transform.localPosition.y > -350))
-            {
-                hand.transform.localPosition += (Vector3)(direction * speed);
-                yield return new WaitForSeconds(0);
-
-                if (up && !isInPosition && hand.transform.localPosition.y > -50)
-                {
-                    isInPosition = true;
-                    anticipationStartTime = Time.time;
-                }
-            }
+            isSliding = true;
+            isSlidingUp = up;
+            slidingDirection = direction;
+            slidingSpeed = speed;
 
             if (switchOnFinish)
             {
@@ -128,8 +165,8 @@ public class ChoppingController : MonoBehaviour
     void Chop()
     {
         hasChopped = true;
+        isChopping = true;
         
-        StartCoroutine(ChopAnimation());
         breathing.Stop();
         coughing.makeSoundsRandomly = false;
 
@@ -164,24 +201,6 @@ public class ChoppingController : MonoBehaviour
         StartCoroutine(SlideHand(false, true));
         
         withdrawl.Play();
-    }
-
-    IEnumerator ChopAnimation()
-    {
-        while (cleaver.localPosition.y > 39)
-        {
-            cleaver.localPosition += (Vector3)(Vector2.down * cleaverSpeed);
-
-            if (cleaver.localScale.x > 0.4f)
-            {
-                cleaver.localScale -= (Vector3)(Vector2.one * 0.1f);   
-            }
-            
-            yield return new WaitForSeconds(0);
-        }
-
-        cleaver.localPosition = new Vector2(cleaver.localPosition.x, 39);
-        cleaver.localScale = Vector2.one * 0.4f;
     }
 
     public IEnumerator Reset(float waitTime)
