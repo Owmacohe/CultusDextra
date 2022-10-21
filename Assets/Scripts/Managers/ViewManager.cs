@@ -5,17 +5,21 @@ public class ViewManager : MonoBehaviour
 {
     [SerializeField]
     GameObject choppingCanvas;
+    [SerializeField]
+    AnimateText goalText, goalTextOffset;
 
     [HideInInspector]
     public bool isChopping;
 
     CultistManager cult;
     ChoppingController chop;
+    PlayerStats playerStats;
 
     void Start()
     {
         cult = FindObjectOfType<CultistManager>();
         chop = FindObjectOfType<ChoppingController>();
+        playerStats = FindObjectOfType<PlayerStats>();
         
         choppingCanvas.SetActive(false);
         
@@ -26,7 +30,11 @@ public class ViewManager : MonoBehaviour
     {
         Debug.Log("<b>VIEW:</b> initialize");
         
-        for (int i = 0; i < 5; i++)
+        UpdateUI();
+        
+        Debug.Log("<b>CULTISTS:</b> add (x" + (5 + playerStats.stats.Day) + ")");
+        
+        for (int i = 0; i < 5 + playerStats.stats.Day; i++)
         {
             cult.AddCultist();
         }
@@ -36,13 +44,14 @@ public class ViewManager : MonoBehaviour
     
     public void ToggleView()
     {
+        UpdateUI();
+        
         if (isChopping)
         {
             Debug.Log("<b>VIEW:</b> cultists");
             
             choppingCanvas.SetActive(false);
             chop.canChop = false;
-            //cult.NewDay();
             StartCoroutine(cult.Reset(2));
         }
         else
@@ -55,6 +64,24 @@ public class ViewManager : MonoBehaviour
         }
 
         isChopping = !isChopping;
+    }
+
+    public void UpdateUI(int scoreAdd = 0)
+    {
+        Debug.Log("<b>VIEW:</b> update stats");
+        
+        Stats stats = playerStats.stats;
+
+        playerStats.stats.Score[stats.Day] += scoreAdd;
+
+        if (playerStats.stats.Score[stats.Day] < 0)
+        {
+            playerStats.stats.Score[stats.Day] = 0;
+        }
+
+        string temp = "Goal: " + stats.Goal[stats.Day] + "\nScore: " + stats.Score[stats.Day];
+        goalText.SetText(AnimateText.AnimTypes.WIGGLE, 0.1f, temp);
+        goalTextOffset.SetText(AnimateText.AnimTypes.WIGGLE, 0.1f, temp);
     }
 
     public Cultist Current()

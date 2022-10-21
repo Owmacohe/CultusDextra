@@ -6,38 +6,25 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    TMP_Text totalCultistsChopped, faithfulChopped, traitorsChopped;
+    GameObject goodOutcome, badOutcome;
     [SerializeField]
-    TMP_Text cultistsMissed, traitorsEscaped;
-    [SerializeField]
-    TMP_Text anticipationBuildup;
+    TMP_Text goodText, badText, anticipationBuildup;
     [SerializeField]
     Image anticipationVignette;
 
-    Stats stats;
+    PlayerStats playerStats;
     AnimateText anim;
 
     void Start()
     {
-        stats = new Stats();
-
+        playerStats = FindObjectOfType<PlayerStats>();
         anim = anticipationBuildup.GetComponent<AnimateText>();
-        
-        UpdateUI();
     }
 
-    void UpdateUI()
+    public void HideOutcomes()
     {
-        Debug.Log("<b>UI:</b> update all");
-        
-        totalCultistsChopped.text = "Total cultists chopped: " + stats.TotalChopped;
-        faithfulChopped.text = "Faithful chopped: " + stats.FaithfulChopped;
-        traitorsChopped.text = "Traitors chopped: " + stats.TraitorsChopped;
-        
-        cultistsMissed.text = "Cultists missed: " + stats.TotalMissed;
-        traitorsEscaped.text = "Traitors escaped: " + stats.TotalEscaped;
-        
-        UpdateUIAnticipation(0);
+        goodOutcome.SetActive(false);
+        badOutcome.SetActive(false);
     }
 
     public void UpdateUIAnticipation(float anticipation)
@@ -60,9 +47,20 @@ public class UIManager : MonoBehaviour
     public void UpdateUIAfterChop(bool chopped, bool faithful, bool escaped)
     {
         Debug.Log("<b>UI:</b> update stats");
-        
-        stats.UpdateAfterChop(chopped, faithful, escaped);
-        
-        UpdateUI();
+
+        playerStats.stats.UpdateAfterChop(chopped, faithful, escaped);
+
+        if (chopped)
+        {
+            goodOutcome.SetActive(true);
+
+            goodText.text = faithful ? "Faithful chopped!" : "Traitor chopped!";
+        }
+        else
+        {
+            badOutcome.SetActive(true);
+
+            badText.text = escaped ? "Traitor escaped!" : "Cultist missed!";
+        }
     }
 }

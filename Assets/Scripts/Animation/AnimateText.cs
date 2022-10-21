@@ -12,8 +12,6 @@ public class AnimateText : MonoBehaviour
     AnimTypes animationType;
     [SerializeField, Range(0, 1)]
     float amplitude = 0.1f;
-    [SerializeField]
-    bool isButton;
 
     TextAnimator anim;
     TextAnimatorPlayer animPlayer;
@@ -27,13 +25,6 @@ public class AnimateText : MonoBehaviour
         innerText = GetComponent<TMP_Text>().text;
         
         SetText(animationType, amplitude);
-        
-        anim.onEvent += OnEvent;
-    }
-
-    void OnDestroy()
-    {
-        anim.onEvent -= OnEvent;
     }
 
     public void SetText(AnimTypes type, float a, string newText = "")
@@ -67,35 +58,6 @@ public class AnimateText : MonoBehaviour
             {
                 anim.SetText(temp, false);   
             }
-        }
-    }
-
-    void ChangeScene()
-    {
-        SceneChange.StaticChange("Main");
-    }
-
-    void OnMouseOver()
-    {
-        if (isButton)
-        {
-            SetText(animationType, amplitude * 2f);   
-        }
-    }
-
-    void OnMouseExit()
-    {
-        if (isButton)
-        {
-            SetText(animationType, amplitude);
-        }
-    }
-
-    void OnEvent(string message)
-    {
-        if (message.Equals("done"))
-        {
-            Invoke(nameof(ChangeScene), 2);
         }
     }
 }
