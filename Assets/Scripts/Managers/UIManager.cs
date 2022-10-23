@@ -40,6 +40,11 @@ public class UIManager : MonoBehaviour
         anticipationBuildup.fontSize = (anticipation * 2f) + 20f;
 
         anticipationVignette.color = new Color(0.4f, 0, 0, anticipation / 10f);
+
+        if (anim == null)
+        {
+            anim = anticipationBuildup.GetComponent<AnimateText>();
+        }
         
         anim.SetText(AnimateText.AnimTypes.SHAKE, (anticipation * 0.02f) + 0.1f, anticipationBuildup.text);
     }

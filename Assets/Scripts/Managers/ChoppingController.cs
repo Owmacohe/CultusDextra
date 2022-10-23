@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ChoppingController : MonoBehaviour
@@ -17,6 +18,10 @@ public class ChoppingController : MonoBehaviour
     Transform cleaver;
     [SerializeField]
     float cleaverSpeed = 1;
+    [SerializeField]
+    GameObject blood, finger;
+    [SerializeField]
+    Sprite handDefault, handChopped;
 
     [SerializeField]
     SoundEffectManager withdrawl, gain, loss, chop, anticipation, breathing, coughing;
@@ -72,7 +77,7 @@ public class ChoppingController : MonoBehaviour
 
         if (isChopping)
         {
-            if (cleaver.localPosition.y > 39)
+            if (cleaver.localPosition.y > 222)
             {
                 cleaver.localPosition += (Vector3)(Vector2.down * cleaverSpeed);
 
@@ -83,7 +88,7 @@ public class ChoppingController : MonoBehaviour
             }
             else
             {
-                cleaver.localPosition = new Vector2(cleaver.localPosition.x, 39);
+                cleaver.localPosition = new Vector2(cleaver.localPosition.x, 222);
                 cleaver.localScale = Vector2.one * 0.4f;
 
                 isChopping = false;
@@ -96,7 +101,7 @@ public class ChoppingController : MonoBehaviour
             
             UI.UpdateUIAnticipation(temp);
 
-            if (Time.time % 0.5f == 0 && temp < 10)
+            if (Time.time % 1 == 0 && temp < 10)
             {
                 view.UpdateUI(1);   
             }
@@ -172,7 +177,7 @@ public class ChoppingController : MonoBehaviour
 
         if (isInPosition)
         {
-            view.UpdateUI(5);
+            view.UpdateUI(2);
             
             if (view.Current().IsTraitor)
             {
@@ -187,6 +192,10 @@ public class ChoppingController : MonoBehaviour
             
             gain.Play();
             chop.Play();
+            
+            blood.SetActive(true);
+            finger.SetActive(true);
+            hand.GetComponentInChildren<Image>().sprite = handChopped;
         }
         else
         {
@@ -208,11 +217,16 @@ public class ChoppingController : MonoBehaviour
         Debug.Log("<b>CHOPPING:</b> reset");
         
         UI.HideOutcomes();
+        UI.UpdateUIAnticipation(0);
+        
+        blood.SetActive(false);
+        finger.SetActive(false);
+        hand.GetComponentInChildren<Image>().sprite = handDefault;
         
         hand.transform.localPosition = Vector2.down * 200;
 
-        cleaver.localPosition = new Vector2(100, 400);
-        cleaver.localScale = Vector2.one * 2;
+        cleaver.localPosition = new Vector2(100, 800);
+        cleaver.localScale = Vector2.one;
         
         yield return new WaitForSeconds(waitTime);
         
