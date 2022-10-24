@@ -60,7 +60,7 @@ public class ChoppingController : MonoBehaviour
             {
                 hand.transform.localPosition += (Vector3)(slidingDirection * slidingSpeed);
 
-                if (isSlidingUp && !isInPosition && hand.transform.localPosition.y > -50)
+                if (isSlidingUp && !isInPosition && hand.transform.localPosition.y > -40)
                 {
                     isInPosition = true;
                     anticipationStartTime = Time.time;
@@ -109,7 +109,7 @@ public class ChoppingController : MonoBehaviour
             if (
                 canChop
                 && view != null && view.Current() != null && view.Current().IsTraitor
-                && (Random.Range(0f, 1f) <= traitorPullChance || (Time.time - anticipationStartTime >= 2.5f)))
+                && (Random.Range(0f, 1f) <= traitorPullChance || (Time.time - anticipationStartTime >= 3f)))
             {
                 Debug.Log("<b>CHOPPING:</b> pull away");
                 
@@ -161,8 +161,7 @@ public class ChoppingController : MonoBehaviour
 
             if (switchOnFinish)
             {
-                yield return new WaitForSeconds(2);
-                view.ToggleView();
+                Invoke(nameof(ToggleView), 2);
             }
         }
     }
@@ -254,5 +253,10 @@ public class ChoppingController : MonoBehaviour
 
         StartCoroutine(SlideHand(true));
         anticipation.Play();
+    }
+
+    void ToggleView()
+    {
+        view.ToggleView();
     }
 }

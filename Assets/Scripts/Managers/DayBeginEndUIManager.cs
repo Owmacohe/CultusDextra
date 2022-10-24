@@ -1,4 +1,5 @@
 ﻿using System;
+using Febucci.UI;
 using TMPro;
 using UnityEngine;
 
@@ -13,10 +14,14 @@ public class DayBeginEndUIManager : MonoBehaviour
     [SerializeField]
     GameObject cont, click;
 
+    bool hasCompletedText;
+    TextAnimatorPlayer player;
+
     void Start()
     {
         PlayerStats playerStats = FindObjectOfType<PlayerStats>();
         Stats stats = playerStats.stats;
+        player = info.GetComponent<TextAnimatorPlayer>();
 
         if (isBegin)
         {
@@ -60,6 +65,22 @@ public class DayBeginEndUIManager : MonoBehaviour
                 
                 Invoke(nameof(Lose), 12);
             }
+        }
+    }
+
+    public void Click()
+    {
+        if (hasCompletedText)
+        {
+            SceneChange.StaticChange(isBegin ? "Main" : "Day Begin");
+        }
+        else
+        {
+            player.waitForNormalChars = 0.002f;
+            player.waitLong = 0.1f;
+            player.waitMiddle = 0.04f;
+
+            hasCompletedText = true;
         }
     }
 

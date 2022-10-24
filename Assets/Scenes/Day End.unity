@@ -560,7 +560,6 @@ GameObject:
   - component: {fileID: 1240305892}
   - component: {fileID: 1240305891}
   - component: {fileID: 1240305890}
-  - component: {fileID: 1240305889}
   m_Layer: 5
   m_Name: Click
   m_TagString: Untagged
@@ -588,21 +587,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1240305889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240305887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480328ba320c407ba27d36b4e251b0ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadOnStart: 0
-  scene: Day Begin
-  bufferSeconds: 1
 --- !u!114 &1240305890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,10 +631,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1240305889}
-        m_TargetAssemblyTypeName: SceneChange, Assembly-CSharp
-        m_MethodName: Change
-        m_Mode: 5
+      - m_Target: {fileID: 79471311}
+        m_TargetAssemblyTypeName: DayBeginEndUIManager, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
