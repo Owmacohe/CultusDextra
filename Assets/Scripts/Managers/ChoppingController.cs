@@ -19,7 +19,7 @@ public class ChoppingController : MonoBehaviour
     [SerializeField]
     float cleaverSpeed = 1;
     [SerializeField]
-    GameObject blood, finger;
+    GameObject blood, finger, chopPopup;
     [SerializeField]
     Sprite handDefault, handChopped;
 
@@ -31,6 +31,7 @@ public class ChoppingController : MonoBehaviour
     float anticipationStartTime;
 
     ViewManager view;
+    PlayerStats playerStats;
 
     bool isSliding, isSlidingUp;
     Vector2 slidingDirection;
@@ -41,6 +42,7 @@ public class ChoppingController : MonoBehaviour
     void Start()
     {
         view = FindObjectOfType<ViewManager>();
+        playerStats = FindObjectOfType<PlayerStats>();
     }
 
     void Update()
@@ -64,6 +66,7 @@ public class ChoppingController : MonoBehaviour
                 {
                     isInPosition = true;
                     anticipationStartTime = Time.time;
+                    chopPopup.SetActive(true);
                 }
             }
             else
@@ -98,10 +101,13 @@ public class ChoppingController : MonoBehaviour
         if (!hasChopped && isInPosition)
         {
             float temp = (Time.time - anticipationStartTime) * 2f;
-            
-            UI.UpdateUIAnticipation(temp);
 
-            if (Time.time % 1 == 0 && temp < 10)
+            if (playerStats.stats.Day > 0)
+            {
+                UI.UpdateUIAnticipation(temp);   
+            }
+
+            if (playerStats.stats.Day > 0 && Time.time % 1 == 0 && temp < 10)
             {
                 view.UpdateUI(1);   
             }
@@ -109,12 +115,16 @@ public class ChoppingController : MonoBehaviour
             if (
                 canChop
                 && view != null && view.Current() != null && view.Current().IsTraitor
-                && (Random.Range(0f, 1f) <= traitorPullChance || (Time.time - anticipationStartTime >= 3f)))
+                && Time.time - anticipationStartTime >= 2.5f
+                && Random.Range(0f, 1f) <= traitorPullChance)
             {
                 Debug.Log("<b>CHOPPING:</b> pull away");
-                
-                view.UpdateUI(-5);
-                
+
+                if (playerStats.stats.Day > 0)
+                {
+                    view.UpdateUI(-5);   
+                }
+
                 hasChopped = true;
                 StartCoroutine(SlideHand(false, true));
                 loss.Play();
@@ -176,8 +186,11 @@ public class ChoppingController : MonoBehaviour
 
         if (isInPosition)
         {
-            view.UpdateUI(2);
-            
+            if (playerStats.stats.Day > 0)
+            {
+                view.UpdateUI(2);   
+            }
+
             if (view.Current().IsTraitor)
             {
                 Debug.Log("<b>CHOPPING:</b> traitor chop");
@@ -199,9 +212,12 @@ public class ChoppingController : MonoBehaviour
         else
         {
             Debug.Log("<b>CHOPPING:</b> early chop");
-            
-            view.UpdateUI(-5);
-            
+
+            if (playerStats.stats.Day > 0)
+            {
+                view.UpdateUI(-5);   
+            }
+
             UI.UpdateUIAfterChop(false, true, false);
             loss.Play();
         }
@@ -216,12 +232,17 @@ public class ChoppingController : MonoBehaviour
         Debug.Log("<b>CHOPPING:</b> reset");
         
         UI.HideOutcomes();
-        UI.UpdateUIAnticipation(0);
+        
+        if (playerStats.stats.Day > 0)
+        {
+            UI.UpdateUIAnticipation(0);   
+        }
         
         blood.SetActive(false);
         finger.SetActive(false);
+        chopPopup.SetActive(false);
         hand.GetComponentInChildren<Image>().sprite = handDefault;
-        
+
         hand.transform.localPosition = Vector2.down * 200;
 
         cleaver.localPosition = new Vector2(100, 800);

@@ -1,6 +1,10 @@
-Deep below the bustling city streets and comforts of daily life lie the labyrinthine tunnels of older powers. The sacrifice required to maintain your demonic presence below is terrible and insatiable. To satisfy your hunger, take but a finger from each member that approaches the dark altar.
+Deep below the bustling city streets and comforts of daily life lie the labyrinthine tunnels of older powers. The sacrifice required to maintain your demonic presence below is terrible and insatiable. To satisfy your hunger, take but a finger from each member that approaches the dark altar...
 
-<font=Essays1743-Italic SDF><color=#C90000>Gain points by chopping cultist fingers and increasing their anticipation. You must achieve each daily goal to continue.
+[DAY]
+
+Your followers now begin to truly respect your dark will; they know what awaits them upon the altar. Feed now upon their worry and their tension. Grow your strength by toying with their emotions before the final moment. Their anticipation will become your power...
+
+<font=Essays1743-Italic SDF><color=#C90000>Chopping fingers now increases your points. The longer you wait before chopping a finger will also increase your points. You must achieve each daily goal to continue.
 
 [DAY]
 

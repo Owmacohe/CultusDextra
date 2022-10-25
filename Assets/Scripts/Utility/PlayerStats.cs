@@ -12,6 +12,6 @@ public class PlayerStats : MonoBehaviour
 
     public void Reset()
     {
-        stats = new Stats();
+        stats = new Stats(1);
     }
 }

@@ -30,7 +30,9 @@ public class UIManager : MonoBehaviour
     public void UpdateUIAnticipation(float anticipation)
     {
         Debug.Log("<b>UI:</b> update anticipation");
-        
+            
+        anticipationBuildup.gameObject.SetActive(true);
+            
         if (anticipation > 10)
         {
             anticipation = 10;
@@ -46,7 +48,7 @@ public class UIManager : MonoBehaviour
             anim = anticipationBuildup.GetComponent<AnimateText>();
         }
         
-        anim.SetText(AnimateText.AnimTypes.SHAKE, (anticipation * 0.02f) + 0.1f, anticipationBuildup.text);
+        anim.SetText(AnimateText.AnimTypes.SHAKE, (anticipation * 0.02f) + 0.1f, anticipationBuildup.text); 
     }
 
     public void UpdateUIAfterChop(bool chopped, bool faithful, bool escaped)

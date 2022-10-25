@@ -134,7 +134,7 @@ public class CultistManager : MonoBehaviour
             traitorThreshold = 0.8f;
         }
         
-        bool isTraitor = playerStats.stats.Day > 0 && Random.Range(0f, 1f) <= traitorThreshold;
+        bool isTraitor = playerStats.stats.Day > 1 && (Random.Range(0f, 1f) <= traitorThreshold);
 
         if (isTraitor)
         {

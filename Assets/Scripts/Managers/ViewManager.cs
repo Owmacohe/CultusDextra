@@ -29,9 +29,12 @@ public class ViewManager : MonoBehaviour
     void Initialize()
     {
         Debug.Log("<b>VIEW:</b> initialize");
-        
-        UpdateUI();
-        
+
+        if (playerStats.stats.Day > 0)
+        {
+            UpdateUI();   
+        }
+
         Debug.Log("<b>CULTISTS:</b> add (x" + (5 + playerStats.stats.Day) + ")");
         
         for (int i = 0; i < 5 + playerStats.stats.Day; i++)
@@ -44,8 +47,11 @@ public class ViewManager : MonoBehaviour
     
     public void ToggleView()
     {
-        UpdateUI();
-        
+        if (playerStats.stats.Day > 0)
+        {
+            UpdateUI();   
+        }
+
         if (isChopping)
         {
             Debug.Log("<b>VIEW:</b> cultists");

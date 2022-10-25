@@ -54,9 +54,9 @@ public class DayBeginEndUIManager : MonoBehaviour
         {
             Debug.Log("<b>DAY BEGIN/END:</b> load end");
             
-            info.text = playerStats.stats.ToString();
+            info.text = playerStats.stats.ToString(playerStats.stats.Day > 0);
 
-            if (stats.Score[playerDay] < stats.Goal[playerDay])
+            if (playerStats.stats.Day > 0 && stats.Score[playerDay] < stats.Goal[playerDay])
             {
                 cont.SetActive(false);
                 click.SetActive(false);
@@ -65,6 +65,14 @@ public class DayBeginEndUIManager : MonoBehaviour
                 
                 Invoke(nameof(Lose), 12);
             }
+        }
+    }
+
+    void Update()
+    {
+        if (!hasCompletedText && player.textAnimator.allLettersShown)
+        {
+            hasCompletedText = true;
         }
     }
 

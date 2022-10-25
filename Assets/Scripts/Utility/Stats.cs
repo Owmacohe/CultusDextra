@@ -14,13 +14,13 @@ public class Stats
     List<int> Early { get; }
     List<int> Escaped { get; }
 
-    public Stats()
+    public Stats(int startingDay)
     {
-        Day = -1;
-        
+        Day = startingDay - 2;
+
         Score = new List<int>();
         Goal = new List<int>();
-        
+
         TotalChopped = new List<int>();
         FaithfulChopped = new List<int>();
         TraitorsChopped = new List<int>();
@@ -28,15 +28,25 @@ public class Stats
         TotalMissed = new List<int>();
         Early = new List<int>();
         Escaped = new List<int>();
+        
+        for (int i = 0; i < Day + 1; i++)
+        {
+            AddNewForAll(0);
+        }
     }
 
     public void NewDay()
     {
         Day++;
         
+        AddNewForAll(25 + (3 * (Day - 1)));
+    }
+
+    void AddNewForAll(int goal)
+    {
         Score.Add(0);
-        Goal.Add(25 + (5 * Day));
-        
+        Goal.Add(goal);
+            
         TotalChopped.Add(0);
         FaithfulChopped.Add(0);
         TraitorsChopped.Add(0);
@@ -86,7 +96,7 @@ public class Stats
         return "";
     }
 
-    public string ToString()
+    public string ToString(bool withScore)
     {
         string faithfulChopped = (Day > 0) ? "\nFaithful chopped: " + FaithfulChopped[Day] : "";
         string traitorsChopped = CheckAndList("\nTraitors chopped: ", TraitorsChopped[Day]);
@@ -95,9 +105,8 @@ public class Stats
         string traitorsEscaped = CheckAndList("\nTraitors escaped: ", Escaped[Day]);
         
         return
-            "Score: " + Score[Day]
-            + "\nGoal: " + Goal[Day]
-            + "\n\nTotal cultists chopped: " + TotalChopped[Day]
+            (withScore ? "Score: " + Score[Day] + "\nGoal: " + Goal[Day] + "\n\n" : "")
+            + "Total cultists chopped: " + TotalChopped[Day]
             + faithfulChopped
             + traitorsChopped
             + "\n\nTotal cultists missed: " + TotalMissed[Day]
