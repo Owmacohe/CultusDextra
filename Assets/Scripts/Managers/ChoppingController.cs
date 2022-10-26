@@ -122,7 +122,7 @@ public class ChoppingController : MonoBehaviour
 
                 if (playerStats.stats.Day > 0)
                 {
-                    view.UpdateUI(-5);   
+                    view.UpdateUI(-3);   
                 }
 
                 hasChopped = true;
@@ -188,7 +188,7 @@ public class ChoppingController : MonoBehaviour
         {
             if (playerStats.stats.Day > 0)
             {
-                view.UpdateUI(2);   
+                view.UpdateUI(3);   
             }
 
             if (view.Current().IsTraitor)
@@ -215,7 +215,7 @@ public class ChoppingController : MonoBehaviour
 
             if (playerStats.stats.Day > 0)
             {
-                view.UpdateUI(-5);   
+                view.UpdateUI(-3);   
             }
 
             UI.UpdateUIAfterChop(false, true, false);

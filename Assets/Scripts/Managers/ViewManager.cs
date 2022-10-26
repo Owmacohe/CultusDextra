@@ -34,10 +34,12 @@ public class ViewManager : MonoBehaviour
         {
             UpdateUI();   
         }
-
-        Debug.Log("<b>CULTISTS:</b> add (x" + (5 + playerStats.stats.Day) + ")");
         
-        for (int i = 0; i < 5 + playerStats.stats.Day; i++)
+        int temp = 3 + playerStats.stats.Day;
+
+        Debug.Log("<b>CULTISTS:</b> add (x" + temp + ")");
+        
+        for (int i = 0; i < temp; i++)
         {
             cult.AddCultist();
         }
